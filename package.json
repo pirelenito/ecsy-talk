@@ -1,0 +1,15 @@
+{
+  "name": "ecs-talk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Paulo Ragonha",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel src/*.html"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.7"
+  }
+}
