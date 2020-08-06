@@ -1,9 +1,9 @@
 const ball = document.createElement('div')
 ball.style.position = 'absolute'
 ball.style.background = '#FFEBEA'
-ball.style.width = '20px'
-ball.style.height = '20px'
-ball.style.borderRadius = '10px'
+ball.style.width = '40px'
+ball.style.height = '40px'
+ball.style.borderRadius = '20px'
 document.body.appendChild(ball)
 
 const gameState = {
@@ -36,7 +36,7 @@ const gameLoop = () => {
   }
 
   // run physics (gravity)
-  gameState.y += gameState.y <= window.innerHeight - 20 ? gameState.gravity * delta : 0
+  gameState.y += gameState.y <= window.innerHeight - 40 ? gameState.gravity * delta : 0
 
   // render the new game state
   ball.style.left = `${gameState.x}px`
