@@ -13,14 +13,7 @@ const gameState = {
   gravity: 0.1,
 }
 
-let previousTime = Date.now()
-
-const gameLoop = () => {
-  const time = Date.now()
-  // take the frame time to adjust the game speed accordingly
-  const delta = time - previousTime
-
-  // read player input
+const inputSystem = (delta: number) => {
   const gamepad = navigator.getGamepads()[0]
 
   if (gamepad) {
@@ -34,15 +27,27 @@ const gameLoop = () => {
     gameState.x += buttonRight ? speed : buttonLeft ? -speed : 0
     gameState.y += buttonDown ? speed : buttonUp ? -speed : 0
   }
+}
 
-  // run physics (gravity)
+const physicsSystem = (delta: number) => {
   gameState.y += gameState.y <= window.innerHeight - 40 ? gameState.gravity * delta : 0
+}
 
-  // render the new game state
+const renderingSystem = (delta: number) => {
   ball.style.left = `${gameState.x}px`
   ball.style.top = `${gameState.y}px`
+}
 
-  // start again
+let previousTime = Date.now()
+
+const gameLoop = () => {
+  const time = Date.now()
+  const delta = time - previousTime
+
+  inputSystem(delta)
+  physicsSystem(delta)
+  renderingSystem(delta)
+
   previousTime = time
   window.requestAnimationFrame(gameLoop)
 }
