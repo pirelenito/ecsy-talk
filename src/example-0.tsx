@@ -7,24 +7,43 @@ ball.style.borderRadius = '10px'
 document.body.appendChild(ball)
 
 const gameState = {
-  ball: {
-    x: 0,
-    y: 0,
-  },
+  x: 0,
+  y: 0,
+  speed: 0.2,
+  gravity: 0.1,
 }
+
+let previousTime = Date.now()
 
 const gameLoop = () => {
   const time = Date.now()
+  // take the frame time to adjust the game speed accordingly
+  const delta = time - previousTime
 
-  // run physics, AI or player input to update the state
-  gameState.ball.x = Math.sin(time / 1000) * 200 + 200
-  gameState.ball.y = Math.cos(time / 1000) * 200 + 200
+  // read player input
+  const gamepad = navigator.getGamepads()[0]
+
+  if (gamepad) {
+    const buttonUp = gamepad.buttons[12].pressed
+    const buttonDown = gamepad.buttons[13].pressed
+    const buttonLeft = gamepad.buttons[14].pressed
+    const buttonRight = gamepad.buttons[15].pressed
+
+    // update game state
+    const speed = gameState.speed * delta
+    gameState.x += buttonRight ? speed : buttonLeft ? -speed : 0
+    gameState.y += buttonDown ? speed : buttonUp ? -speed : 0
+  }
+
+  // run physics (gravity)
+  gameState.y += gameState.y <= window.innerHeight - 20 ? gameState.gravity * delta : 0
 
   // render the new game state
-  ball.style.left = `${gameState.ball.x}px`
-  ball.style.top = `${gameState.ball.y}px`
+  ball.style.left = `${gameState.x}px`
+  ball.style.top = `${gameState.y}px`
 
   // start again
+  previousTime = time
   window.requestAnimationFrame(gameLoop)
 }
 
