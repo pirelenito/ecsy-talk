@@ -14,6 +14,8 @@ class RigidBodyTagComponent extends TagComponent {}
 
 class RenderableTagComponent extends TagComponent {}
 
+class PlayerComponent extends TagComponent {}
+
 class GamepadComponent extends Component<GamepadComponent> {
   index!: number
   buttonUpPressed: boolean
@@ -45,7 +47,7 @@ class GamepadSystem extends System {
   }
 
   execute() {
-    this.queries.gamepads.changed.forEach((e) => this.updateGamepad(e))
+    this.queries.gamepads.results.forEach((e) => this.updateGamepad(e))
   }
 
   static queries = {
@@ -120,7 +122,7 @@ const GRAVITY = 0.1
 class PhysicsSystem extends System {
   runGravity(delta: number, entity: Entity) {
     const position = entity.getMutableComponent(PositionComponent)
-    position.y = position.y <= window.innerHeight - 40 ? GRAVITY * delta : 0
+    position.y += position.y <= window.innerHeight - 40 ? GRAVITY * delta : 0
   }
 
   execute(delta: number) {
@@ -132,20 +134,45 @@ class PhysicsSystem extends System {
   }
 }
 
+const SPEED = 0.2
+
+class PlayerMovementSystem extends System {
+  runGravity(delta: number, entity: Entity) {
+    const position = entity.getMutableComponent(PositionComponent)
+    const gamepad = entity.getComponent(GamepadComponent)
+
+    const speed = SPEED * delta
+
+    position.x += gamepad.buttonRightPressed ? speed : gamepad.buttonLeftPressed ? -speed : 0
+    position.y += gamepad.buttonDownPressed ? speed : gamepad.buttonUpPressed ? -speed : 0
+  }
+
+  execute(delta: number) {
+    this.queries.players.results.forEach((e) => this.runGravity(delta, e))
+  }
+
+  static queries = {
+    players: { components: [PlayerComponent, GamepadComponent, PositionComponent] },
+  }
+}
+
 const world = new World()
 
 world.registerComponent(PositionComponent)
 world.registerComponent(RigidBodyTagComponent)
 world.registerComponent(RenderableTagComponent)
 world.registerComponent(GamepadComponent)
+world.registerComponent(PlayerComponent)
 
 world.registerComponent(RenderingSystemStateComponent)
 
 world.registerSystem(GamepadSystem)
+world.registerSystem(PlayerMovementSystem)
 world.registerSystem(PhysicsSystem)
 world.registerSystem(RenderingSystem)
 
 const playerOne = world.createEntity()
+playerOne.addComponent(PlayerComponent)
 playerOne.addComponent(RenderableTagComponent)
 playerOne.addComponent(RigidBodyTagComponent)
 playerOne.addComponent(GamepadComponent)
