@@ -175,8 +175,15 @@ const playerOne = world.createEntity()
 playerOne.addComponent(PlayerComponent)
 playerOne.addComponent(RenderableTagComponent)
 playerOne.addComponent(RigidBodyTagComponent)
-playerOne.addComponent(GamepadComponent)
+playerOne.addComponent(GamepadComponent, { index: 0 })
 playerOne.addComponent(PositionComponent)
+
+const playerTwo = world.createEntity()
+playerTwo.addComponent(PlayerComponent)
+playerTwo.addComponent(RenderableTagComponent)
+playerTwo.addComponent(RigidBodyTagComponent)
+playerTwo.addComponent(GamepadComponent, { index: 1 })
+playerTwo.addComponent(PositionComponent, { x: 100, y: 0 })
 
 let previousTime = Date.now()
 
