@@ -5,7 +5,7 @@ const gameState = {
   gravity: 0.1,
 }
 
-const inputSystem = (delta: number) => {
+const runInput = (delta: number) => {
   const gamepad = navigator.getGamepads()[0]
 
   if (gamepad) {
@@ -20,11 +20,11 @@ const inputSystem = (delta: number) => {
   }
 }
 
-const physicsSystem = (delta: number) => {
+const runPhysics = (delta: number) => {
   gameState.y += gameState.y <= window.innerHeight - 40 ? gameState.gravity * delta : 0
 }
 
-const renderingSystem = (delta: number) => {
+const runRendering = (delta: number) => {
   const ball = document.getElementById('ball')
 
   ball.style.left = `${gameState.x}px`
@@ -37,9 +37,9 @@ const gameLoop = () => {
   const time = Date.now()
   const delta = time - previousTime
 
-  inputSystem(delta)
-  physicsSystem(delta)
-  renderingSystem(delta)
+  runInput(delta)
+  runPhysics(delta)
+  runRendering(delta)
 
   previousTime = time
   window.requestAnimationFrame(gameLoop)
