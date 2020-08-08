@@ -11,5 +11,8 @@
     "parcel": "^1.12.4",
     "prettier": "^2.0.5",
     "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "ecsy": "^0.4.0"
   }
 }
