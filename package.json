@@ -8,7 +8,7 @@
     "dev": "parcel src/*.html"
   },
   "devDependencies": {
-    "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5",
     "typescript": "^3.9.7"
   },
