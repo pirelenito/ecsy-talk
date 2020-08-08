@@ -1,8 +1,8 @@
 import { Component, TagComponent, Types, System, SystemStateComponent, Not, Entity, World } from 'ecsy'
 
 class PositionComponent extends Component<PositionComponent> {
-  x: number
-  y: number
+  x!: number
+  y!: number
 
   static schema = {
     x: { type: Types.Number, default: 0 },
@@ -18,13 +18,13 @@ class PlayerComponent extends TagComponent {}
 
 class GamepadComponent extends Component<GamepadComponent> {
   index!: number
-  buttonUpPressed: boolean
-  buttonDownPressed: boolean
-  buttonLeftPressed: boolean
-  buttonRightPressed: boolean
+  buttonUpPressed!: boolean
+  buttonDownPressed!: boolean
+  buttonLeftPressed!: boolean
+  buttonRightPressed!: boolean
 
   static schema = {
-    index: { type: Types.Number },
+    index: { type: Types.Number, default: 0 },
     buttonUpPressed: { type: Types.Boolean, default: false },
     buttonDownPressed: { type: Types.Boolean, default: false },
     buttonLeftPressed: { type: Types.Boolean, default: false },
@@ -35,6 +35,7 @@ class GamepadComponent extends Component<GamepadComponent> {
 class GamepadSystem extends System {
   updateGamepad(entity: Entity) {
     const gamepadComponent = entity.getMutableComponent(GamepadComponent)
+    if (!gamepadComponent) return
 
     const gamepad = navigator.getGamepads()[gamepadComponent.index]
 
@@ -58,10 +59,10 @@ class GamepadSystem extends System {
 }
 
 class RenderingSystemStateComponent extends SystemStateComponent<RenderingSystemStateComponent> {
-  element: HTMLDivElement
+  element?: HTMLDivElement
 
   static schema = {
-    element: { type: Types.Ref, default: false },
+    element: { type: Types.Ref },
   }
 }
 
@@ -81,6 +82,7 @@ class RenderingSystem extends System {
   updatePosition(entity: Entity) {
     const stateComponent = entity.getComponent(RenderingSystemStateComponent)
     const position = entity.getComponent(PositionComponent)
+    if (!position || !stateComponent || !stateComponent.element) return
 
     stateComponent.element.style.left = `${position.x}px`
     stateComponent.element.style.top = `${position.y}px`
@@ -88,15 +90,19 @@ class RenderingSystem extends System {
 
   removeRenderable(entity: Entity) {
     const stateComponent = entity.getComponent(RenderingSystemStateComponent)
-    document.body.removeChild(stateComponent.element)
+    if (!stateComponent) return
+
+    if (stateComponent.element) {
+      document.body.removeChild(stateComponent.element)
+    }
 
     entity.removeComponent(RenderingSystemStateComponent)
   }
 
   execute() {
-    this.queries.uninitializedRenderables.added.forEach((e) => this.addRenderable(e))
-    this.queries.positions.changed.forEach((e) => this.updatePosition(e))
-    this.queries.initializedRenderables.removed.forEach((e) => this.removeRenderable(e))
+    this.queries.uninitializedRenderables.added?.forEach((e) => this.addRenderable(e))
+    this.queries.positions.changed?.forEach((e) => this.updatePosition(e))
+    this.queries.initializedRenderables.removed?.forEach((e) => this.removeRenderable(e))
   }
 
   static queries = {
@@ -122,6 +128,8 @@ const GRAVITY = 0.1
 class PhysicsSystem extends System {
   runGravity(delta: number, entity: Entity) {
     const position = entity.getMutableComponent(PositionComponent)
+    if (!position) return
+
     position.y += position.y <= window.innerHeight - 40 ? GRAVITY * delta : 0
   }
 
@@ -140,6 +148,7 @@ class PlayerMovementSystem extends System {
   runGravity(delta: number, entity: Entity) {
     const position = entity.getMutableComponent(PositionComponent)
     const gamepad = entity.getComponent(GamepadComponent)
+    if (!gamepad || !position) return
 
     const speed = SPEED * delta
 
