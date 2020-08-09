@@ -1,6 +1,6 @@
 const element = document.getElementById('ball')
 
-const gameState = {
+const state = {
   ball: {
     x: 0,
     y: 0,
@@ -8,14 +8,14 @@ const gameState = {
 }
 
 const gameLoop = () => {
-  const time = Date.now()
+  const time = Date.now() / 1000
 
-  gameState.ball.x = Math.sin(time / 1000) * 200 + 200
-  gameState.ball.y = Math.cos(time / 1000) * 200 + 200
+  state.ball.x = Math.sin(time) * 200 + 200
+  state.ball.y = Math.cos(time) * 200 + 200
 
   if (element) {
-    element.style.left = `${gameState.ball.x}px`
-    element.style.top = `${gameState.ball.y}px`
+    element.style.left = `${state.ball.x}px`
+    element.style.top = `${state.ball.y}px`
   }
 
   window.requestAnimationFrame(gameLoop)
