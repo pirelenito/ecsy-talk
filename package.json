@@ -5,7 +5,8 @@
   "author": "Paulo Ragonha",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel src/**/*.html"
+    "dev": "parcel src/**/*.html",
+    "build": "parcel build src/**/*.html"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
