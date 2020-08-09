@@ -1,9 +1,9 @@
 import GameState from './GameState'
 
 export default function runRendering(gameState: GameState, delta: number) {
-  const ball = document.getElementById('ball')
-  if (!ball) return
+  const element = document.getElementById('ball')
+  if (!element) return
 
-  ball.style.left = `${gameState.x}px`
-  ball.style.top = `${gameState.y}px`
+  element.style.left = `${gameState.x}px`
+  element.style.top = `${gameState.y}px`
 }
