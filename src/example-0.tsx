@@ -22,7 +22,7 @@ const runInput = (delta: number) => {
   }
 }
 
-const runPlayerMovement = (delta) => {
+const runPlayerMovement = (delta: number) => {
   const speed = SPEED * delta
   gameState.x += gameState.buttonRightPressed ? speed : gameState.buttonLeftPressed ? -speed : 0
   gameState.y += gameState.buttonDownPressed ? speed : gameState.buttonUpPressed ? -speed : 0
@@ -34,6 +34,7 @@ const runPhysics = (delta: number) => {
 
 const runRendering = (delta: number) => {
   const ball = document.getElementById('ball')
+  if (!ball) return
 
   ball.style.left = `${gameState.x}px`
   ball.style.top = `${gameState.y}px`
@@ -55,3 +56,5 @@ const gameLoop = () => {
 }
 
 gameLoop()
+
+export default {}
