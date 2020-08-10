@@ -32,16 +32,6 @@ playerOne.addComponent(RigidBodyComponent)
 playerOne.addComponent(GamepadComponent, { index: 0 })
 playerOne.addComponent(PositionComponent)
 
-const playerTwo = world.createEntity()
-playerTwo.addComponent(PlayerComponent)
-playerTwo.addComponent(RenderableComponent)
-playerTwo.addComponent(RigidBodyComponent)
-playerTwo.addComponent(GamepadComponent, { index: 1 })
-playerTwo.addComponent(PositionComponent, {
-  x: 100,
-  y: 0,
-})
-
 let previousTime = Date.now()
 
 const gameLoop = () => {
