@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel src/**/*.html",
-    "build": "parcel build src/**/*.html"
+    "build": "parcel build src/**/*.html",
+    "format": "prettier --write \"**/*.@(css|ts)\""
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",

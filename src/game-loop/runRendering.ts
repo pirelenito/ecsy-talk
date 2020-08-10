@@ -1,9 +1,6 @@
 import GameState from './GameState'
 
-export default function runRendering(
-  gameState: GameState,
-  delta: number,
-) {
+export default function runRendering(gameState: GameState, delta: number) {
   const element = document.getElementById('ball')
   if (!element) return
 

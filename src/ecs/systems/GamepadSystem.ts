@@ -3,16 +3,18 @@ import GamepadComponent from '../components/GamepadComponent'
 
 export default class GamepadSystem extends System {
   updateGamepad(entity: Entity) {
-    const gamepadComponent = entity.getMutableComponent(GamepadComponent)
-    if (!gamepadComponent) return
+    const gamepad = entity.getMutableComponent(GamepadComponent)
+    if (!gamepad) return
 
-    const gamepad = navigator.getGamepads()[gamepadComponent.index]
+    const navigatorGamepad = navigator.getGamepads()[gamepad.index]
 
-    if (gamepad) {
-      gamepadComponent.buttonUpPressed = gamepad.buttons[12].pressed
-      gamepadComponent.buttonDownPressed = gamepad.buttons[13].pressed
-      gamepadComponent.buttonLeftPressed = gamepad.buttons[14].pressed
-      gamepadComponent.buttonRightPressed = gamepad.buttons[15].pressed
+    if (navigatorGamepad) {
+      const buttons = navigatorGamepad.buttons
+
+      gamepad.buttonUpPressed = buttons[12].pressed
+      gamepad.buttonDownPressed = buttons[13].pressed
+      gamepad.buttonLeftPressed = buttons[14].pressed
+      gamepad.buttonRightPressed = buttons[15].pressed
     }
   }
 

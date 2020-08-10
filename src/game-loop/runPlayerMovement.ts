@@ -2,10 +2,7 @@ import GameState from './GameState'
 
 const SPEED = 0.2
 
-export default function runPlayerMovement(
-  gameState: GameState,
-  delta: number,
-) {
+export default function runPlayerMovement(gameState: GameState, delta: number) {
   const speed = SPEED * delta
 
   if (gameState.buttonRightPressed) {
@@ -17,10 +14,10 @@ export default function runPlayerMovement(
   }
 
   if (gameState.buttonDownPressed) {
-    gameState.x += speed
+    gameState.y += speed
   }
 
   if (gameState.buttonUpPressed) {
-    gameState.x -= speed
+    gameState.y -= speed
   }
 }

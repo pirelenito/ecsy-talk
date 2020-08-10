@@ -37,7 +37,10 @@ playerTwo.addComponent(PlayerComponent)
 playerTwo.addComponent(RenderableComponent)
 playerTwo.addComponent(RigidBodyComponent)
 playerTwo.addComponent(GamepadComponent, { index: 1 })
-playerTwo.addComponent(PositionComponent, { x: 100, y: 0 })
+playerTwo.addComponent(PositionComponent, {
+  x: 100,
+  y: 0,
+})
 
 let previousTime = Date.now()
 

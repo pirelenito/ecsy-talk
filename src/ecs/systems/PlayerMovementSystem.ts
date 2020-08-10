@@ -13,8 +13,21 @@ export default class PlayerMovementSystem extends System {
 
     const speed = SPEED * delta
 
-    position.x += gamepad.buttonRightPressed ? speed : gamepad.buttonLeftPressed ? -speed : 0
-    position.y += gamepad.buttonDownPressed ? speed : gamepad.buttonUpPressed ? -speed : 0
+    if (gamepad.buttonRightPressed) {
+      position.x += speed
+    }
+
+    if (gamepad.buttonLeftPressed) {
+      position.x -= speed
+    }
+
+    if (gamepad.buttonDownPressed) {
+      position.y += speed
+    }
+
+    if (gamepad.buttonUpPressed) {
+      position.y -= speed
+    }
   }
 
   execute(delta: number) {
@@ -22,6 +35,8 @@ export default class PlayerMovementSystem extends System {
   }
 
   static queries = {
-    players: { components: [PlayerComponent, GamepadComponent, PositionComponent] },
+    players: {
+      components: [PlayerComponent, GamepadComponent, PositionComponent],
+    },
   }
 }

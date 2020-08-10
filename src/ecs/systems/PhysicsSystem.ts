@@ -9,7 +9,9 @@ export default class PhysicsSystem extends System {
     const position = entity.getMutableComponent(PositionComponent)
     if (!position) return
 
-    position.y += position.y <= window.innerHeight - 40 ? GRAVITY * delta : 0
+    if (position.y < window.innerHeight - 40) {
+      position.y += GRAVITY * delta
+    }
   }
 
   execute(delta: number) {
@@ -17,6 +19,8 @@ export default class PhysicsSystem extends System {
   }
 
   static queries = {
-    rigidBodies: { components: [RigidBodyComponent, PositionComponent] },
+    rigidBodies: {
+      components: [RigidBodyComponent, PositionComponent],
+    },
   }
 }

@@ -37,18 +37,18 @@ export default class RenderingSystem extends System {
   }
 
   execute() {
-    this.queries.uninitializedRenderables.added?.forEach((e) => this.addRenderable(e))
+    this.queries.uninitialized.added?.forEach((e) => this.addRenderable(e))
     this.queries.positions.changed?.forEach((e) => this.updatePosition(e))
-    this.queries.initializedRenderables.removed?.forEach((e) => this.removeRenderable(e))
+    this.queries.initialized.removed?.forEach((e) => this.removeRenderable(e))
   }
 
   static queries = {
-    uninitializedRenderables: {
+    uninitialized: {
       components: [RenderableComponent, Not(RenderingSystemStateComponent)],
       listen: { added: true },
     },
 
-    initializedRenderables: {
+    initialized: {
       components: [RenderableComponent, RenderingSystemStateComponent],
       listen: { removed: true },
     },

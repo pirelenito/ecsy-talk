@@ -1,9 +1,6 @@
 import GameState from './GameState'
 
-export default function runInput(
-  gameState: GameState,
-  delta: number,
-) {
+export default function runInput(gameState: GameState, delta: number) {
   const gamepad = navigator.getGamepads()[0]
 
   if (gamepad) {
