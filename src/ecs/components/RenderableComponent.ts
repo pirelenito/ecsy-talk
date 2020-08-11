@@ -1,8 +1,6 @@
 import { Component, Types } from 'ecsy'
 
-export default class RenderableComponent extends Component<
-  RenderableComponent
-> {
+export default class RenderableComponent extends Component<RenderableComponent> {
   color!: string
 
   static schema = {

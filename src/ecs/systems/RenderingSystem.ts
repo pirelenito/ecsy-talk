@@ -19,9 +19,7 @@ export default class RenderingSystem extends System {
     element.style.top = `${position.y}px`
     document.body.appendChild(element)
 
-    entity.addComponent(RenderingSystemStateComponent, {
-      element,
-    })
+    entity.addComponent(RenderingSystemStateComponent, { element })
   }
 
   updatePosition(entity: Entity) {
@@ -52,11 +50,7 @@ export default class RenderingSystem extends System {
 
   static queries = {
     uninitialized: {
-      components: [
-        PositionComponent,
-        RenderableComponent,
-        Not(RenderingSystemStateComponent),
-      ],
+      components: [PositionComponent, RenderableComponent, Not(RenderingSystemStateComponent)],
       listen: { added: true },
     },
 
