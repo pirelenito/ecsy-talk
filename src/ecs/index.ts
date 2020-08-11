@@ -30,6 +30,8 @@ world.registerSystem(RenderingSystem)
 
 createPlayer(world, 0)
 createPlayer(world, 1)
+createPlayer(world, 2)
+createPlayer(world, 3)
 
 for (let index = 0; index < 20; index++) {
   createPhysicalObject(world)
