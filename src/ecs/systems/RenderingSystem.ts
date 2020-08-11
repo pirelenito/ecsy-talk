@@ -5,12 +5,18 @@ import RenderableComponent from '../components/RenderableComponent'
 
 export default class RenderingSystem extends System {
   addRenderable(entity: Entity) {
+    const position = entity.getComponent(PositionComponent)
+    const renderable = entity.getComponent(RenderableComponent)
+    if (!position || !renderable) return
+
     const element = document.createElement('div')
     element.style.position = 'absolute'
-    element.style.background = '#FFEBEA'
+    element.style.background = renderable.color
     element.style.width = '40px'
     element.style.height = '40px'
     element.style.borderRadius = '20px'
+    element.style.left = `${position.x}px`
+    element.style.top = `${position.y}px`
     document.body.appendChild(element)
 
     entity.addComponent(RenderingSystemStateComponent, { element })
@@ -44,7 +50,11 @@ export default class RenderingSystem extends System {
 
   static queries = {
     uninitialized: {
-      components: [RenderableComponent, Not(RenderingSystemStateComponent)],
+      components: [
+        PositionComponent,
+        RenderableComponent,
+        Not(RenderingSystemStateComponent),
+      ],
       listen: { added: true },
     },
 
