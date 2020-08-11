@@ -19,7 +19,9 @@ export default class RenderingSystem extends System {
     element.style.top = `${position.y}px`
     document.body.appendChild(element)
 
-    entity.addComponent(RenderingSystemStateComponent, { element })
+    entity.addComponent(RenderingSystemStateComponent, {
+      element,
+    })
   }
 
   updatePosition(entity: Entity) {
@@ -58,14 +60,14 @@ export default class RenderingSystem extends System {
       listen: { added: true },
     },
 
-    initialized: {
-      components: [RenderableComponent, RenderingSystemStateComponent],
-      listen: { removed: true },
-    },
-
     positions: {
       components: [PositionComponent, RenderingSystemStateComponent],
       listen: { changed: true },
+    },
+
+    initialized: {
+      components: [RenderableComponent, RenderingSystemStateComponent],
+      listen: { removed: true },
     },
   }
 }
