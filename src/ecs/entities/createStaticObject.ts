@@ -6,7 +6,7 @@ export default function createStaticObject(world: World) {
   const staticObject = world.createEntity()
   staticObject.addComponent(RenderableComponent, { color: '#CFFF47' })
   staticObject.addComponent(PositionComponent, {
-    x: Math.random() * window.innerWidth + 20,
-    y: Math.random() * window.innerHeight - 20,
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight - 40,
   })
 }

@@ -13,5 +13,5 @@ export default function createPlayer(world: World, index: number = 0) {
   player.addComponent(RenderableComponent, { color: playerColors[index] })
   player.addComponent(RigidBodyComponent)
   player.addComponent(GamepadComponent, { index })
-  player.addComponent(PositionComponent, { x: index * 40 })
+  player.addComponent(PositionComponent, { x: index * 60 })
 }

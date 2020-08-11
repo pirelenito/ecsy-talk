@@ -8,7 +8,7 @@ export default function createPhysicalObject(world: World) {
   physicalObject.addComponent(RenderableComponent, { color: '#FF4768' })
   physicalObject.addComponent(RigidBodyComponent)
   physicalObject.addComponent(PositionComponent, {
-    x: Math.random() * window.innerWidth + 20,
-    y: Math.random() * window.innerHeight - 20,
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight - 40,
   })
 }
