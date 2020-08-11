@@ -26,7 +26,8 @@ world.registerSystem(PlayerMovementSystem)
 world.registerSystem(PhysicsSystem)
 world.registerSystem(RenderingSystem)
 
-createPlayer(world)
+createPlayer(world, 0)
+createPlayer(world, 1)
 
 let previousTime = Date.now()
 

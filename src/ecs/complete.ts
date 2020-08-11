@@ -10,6 +10,8 @@ import PlayerMovementSystem from './systems/PlayerMovementSystem'
 import PhysicsSystem from './systems/PhysicsSystem'
 import RenderingSystem from './systems/RenderingSystem'
 import createPlayer from './entities/createPlayer'
+import createStaticObject from './entities/createStaticObject'
+import createPhysicalObject from './entities/createPhysicalObject'
 
 const world = new World()
 
@@ -26,7 +28,18 @@ world.registerSystem(PlayerMovementSystem)
 world.registerSystem(PhysicsSystem)
 world.registerSystem(RenderingSystem)
 
-createPlayer(world)
+createPlayer(world, 0)
+createPlayer(world, 1)
+createPlayer(world, 2)
+createPlayer(world, 3)
+
+for (let index = 0; index < 10; index++) {
+  createPhysicalObject(world)
+}
+
+for (let index = 0; index < 10; index++) {
+  createStaticObject(world)
+}
 
 let previousTime = Date.now()
 
