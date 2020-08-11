@@ -28,8 +28,8 @@ world.registerSystem(PlayerMovementSystem)
 world.registerSystem(PhysicsSystem)
 world.registerSystem(RenderingSystem)
 
-createPlayer(world, { index: 0 })
-createPlayer(world, { index: 1 })
+createPlayer(world, 0)
+createPlayer(world, 1)
 
 for (let index = 0; index < 20; index++) {
   createPhysicalObject(world)

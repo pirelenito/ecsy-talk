@@ -7,7 +7,7 @@ import PositionComponent from '../components/PositionComponent'
 
 const playerColors = ['#BFBEFF', '#BEFFD8', '#F6FFBE', '#FFBECA']
 
-export default function (world: World, { index }: { index: number }) {
+export default function createPlayer(world: World, index: number = 0) {
   const player = world.createEntity()
   player.addComponent(PlayerComponent)
   player.addComponent(RenderableComponent, { color: playerColors[index] })
