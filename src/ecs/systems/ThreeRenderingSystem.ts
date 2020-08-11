@@ -24,10 +24,10 @@ export default class ThreeRenderingSystem extends System {
       1,
       100,
     )
+    camera.position.x = 0
     camera.position.y = 2
-    camera.position.z = 3
-    camera.position.x = 1
-    camera.lookAt(new THREE.Vector3(1, 0, 3))
+    camera.position.z = 2
+    camera.lookAt(new THREE.Vector3(0, 0, 2))
 
     scene.add(camera)
 
@@ -49,7 +49,7 @@ export default class ThreeRenderingSystem extends System {
     const geometry = new THREE.SphereBufferGeometry()
     const material = new THREE.MeshStandardMaterial({ color: renderable.color })
     const mesh = new THREE.Mesh(geometry, material)
-    mesh.position.set(position.x / 10, 0, position.y / 10)
+    mesh.position.set(position.x / 10 - 40, 0, position.y / 10 - 40)
     this.scene.add(mesh)
 
     entity.addComponent(ThreeRenderingSystemStateComponent, { mesh })
@@ -60,7 +60,7 @@ export default class ThreeRenderingSystem extends System {
     const position = entity.getComponent(PositionComponent)
     if (!position || !stateComponent || !stateComponent.mesh) return
 
-    stateComponent.mesh.position.set(position.x / 10, 0, position.y / 10)
+    stateComponent.mesh.position.set(position.x / 10 - 40, 0, position.y / 10 - 40)
   }
 
   removeRenderable(entity: Entity) {
