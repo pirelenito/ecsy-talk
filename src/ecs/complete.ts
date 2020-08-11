@@ -9,9 +9,9 @@ import GamepadSystem from './systems/GamepadSystem'
 import PlayerMovementSystem from './systems/PlayerMovementSystem'
 import PhysicsSystem from './systems/PhysicsSystem'
 import RenderingSystem from './systems/RenderingSystem'
-import createPlayer from './entities/createPlayer'
-import createStaticObject from './entities/createStaticObject'
-import createPhysicalObject from './entities/createPhysicalObject'
+import createPlayerEntity from './entities/createPlayerEntity'
+import createStaticObjectEntity from './entities/createStaticObjectEntity'
+import createPhysicalObjectEntity from './entities/createPhysicalObjectEntity'
 
 const world = new World()
 
@@ -28,17 +28,17 @@ world.registerSystem(PlayerMovementSystem)
 world.registerSystem(PhysicsSystem)
 world.registerSystem(RenderingSystem)
 
-createPlayer(world, 0)
-createPlayer(world, 1)
-createPlayer(world, 2)
-createPlayer(world, 3)
+createPlayerEntity(world, 0)
+createPlayerEntity(world, 1)
+createPlayerEntity(world, 2)
+createPlayerEntity(world, 3)
 
 for (let index = 0; index < 10; index++) {
-  createPhysicalObject(world)
+  createPhysicalObjectEntity(world)
 }
 
 for (let index = 0; index < 10; index++) {
-  createStaticObject(world)
+  createStaticObjectEntity(world)
 }
 
 let previousTime = Date.now()

@@ -9,7 +9,7 @@ import GamepadSystem from './systems/GamepadSystem'
 import PlayerMovementSystem from './systems/PlayerMovementSystem'
 import PhysicsSystem from './systems/PhysicsSystem'
 import RenderingSystem from './systems/RenderingSystem'
-import createPlayer from './entities/createPlayer'
+import createPlayerEntity from './entities/createPlayerEntity'
 
 const world = new World()
 
@@ -26,8 +26,8 @@ world.registerSystem(PlayerMovementSystem)
 world.registerSystem(PhysicsSystem)
 world.registerSystem(RenderingSystem)
 
-createPlayer(world, 0)
-createPlayer(world, 1)
+createPlayerEntity(world, 0)
+createPlayerEntity(world, 1)
 
 let previousTime = Date.now()
 

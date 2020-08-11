@@ -3,9 +3,11 @@ import RenderableComponent from '../components/RenderableComponent'
 import PositionComponent from '../components/PositionComponent'
 import RigidBodyComponent from '../components/RigidBodyComponent'
 
-export default function createPhysicalObject(world: World) {
+export default function createPhysicalObjectEntity(world: World) {
   const physicalObject = world.createEntity()
-  physicalObject.addComponent(RenderableComponent, { color: '#FF4768' })
+  physicalObject.addComponent(RenderableComponent, {
+    color: '#FF4768',
+  })
   physicalObject.addComponent(RigidBodyComponent)
   physicalObject.addComponent(PositionComponent, {
     x: Math.random() * window.innerWidth,
