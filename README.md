@@ -36,4 +36,4 @@ Built with:
 
 - [ECSY](https://ecsy.io/)
 - [Parcel](https://parceljs.org/)
-- [thee.js](https://threejs.org/)
+- [three.js](https://threejs.org/)
